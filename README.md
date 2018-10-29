@@ -58,3 +58,18 @@ INSTALLING & RUNNING
     Also verify the installation path to the ImageUtilities library 
     in the file setup.py.
     
+CONTENT
+
+1. The folder 'cudaTV' contains the Optimization Layer from the ACCV paper. 
+   More precisely this is the TV version. Contained is a PyTorch layer:
+   'TVInpainting.py' that can be used directly after compilation succeeds. 
+   Note the 'id' parameter. This one ensures that the buffers are assigned to 
+   the correct instantiation of the layer. This allows one to have multiple of 
+   these layers executed, for instance to build a hierarchical scheme as was 
+   done for optical flow computation. For now the ids are limited to 0..9 and 
+   each layer should have a different id. With a trivial change in the code (setting
+   __uniqueIds__ in TVInpaintFista.h to a different value) one can have more layers.
+2. The folder 'cudaTGV' contains the TGV version of the optimization layer 
+   used in the ACCV paper.
+   
+   
