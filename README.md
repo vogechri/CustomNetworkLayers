@@ -11,16 +11,19 @@
 ###################################################################
 
 About:
-The repository holds several custom network layers. Some of which were used in my recent optical flow project: Learning Energy Based Inpainting for Optical Flow.
+The repository holds several custom network layers. 
+Some of which were used in my recent optical flow project: 
+Learning Energy Based Inpainting for Optical Flow.
 
-The additional and necessary library
+The additional and necessary libraries
  - ImageUtilities
- 
-is not included.
+ - CUDA Programming model 
+are not included.
 
-To download that package follow the link:
+To download those packages follow the links:
+https://developer.nvidia.com/cuda-zone
 https://github.com/VLOGroup/imageutilities
-and read the licensing information provided there.
+and read the licensing and installation information provided there.
 
 =====================================================================
 
