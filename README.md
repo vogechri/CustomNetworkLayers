@@ -71,5 +71,10 @@ CONTENT
    __uniqueIds__ in TVInpaintFista.h to a different value) one can have more layers.
 2. The folder 'cudaTGV' contains the TGV version of the optimization layer 
    used in the ACCV paper.
-   
+3. The folder QuadFitting holds a version of our quadratic fitting procedure through 
+   which we can backpropagate through. That code was also used in our ACCV paper.
+4. The folder cudaMedian implements a weighted median Layer. Ie. we can learn the 
+   weights of a weighted median Filter. Such a filter is used in popular optical flow
+   methods, eg. in Sun et al. 'Secrets of Optical Flow Estimation and Their Principles'
+   method. Here we ahve a learnable version of that filter (ie. we can learn the weights).
    
