@@ -15,6 +15,7 @@ The repository holds several custom network layers. Some of which were used in m
 
 The additional and optional library
  - ImageUtilities
+ 
 is not included.
 
 To download that package follow the link:
@@ -34,15 +35,15 @@ Results are also always subject to the training procedure, training set, etc.
 IMPORTANT:
 If you use this software you should cite the following in any resulting publication:
 
-    [1] An Evaluation of Data Costs for Optical Flow
-        C. Vogel, S. Roth and K. Schindler
-        In GCPR, Saarbruecken, Germany, September 2013
+    [1] Learning Energy Based Inpainting for Optical Flow
+        C. Vogel, P. Knoebelreiter and T. Pock
+        In ACCV, Perth, Australia, December 2018
 
 
 INSTALLING & RUNNING
 
 1.	Download and install PyTorch from https://pytorch.org/
-	  and similarly acquire ImageUtilities from 
+    and similarly acquire ImageUtilities from 
     https://github.com/VLOGroup/imageutilities. 
     Compile ImageUtilities and if desired create a system variable pointing 
     to the installation path 
