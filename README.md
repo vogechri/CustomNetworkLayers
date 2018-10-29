@@ -21,14 +21,15 @@ To download that package follow the link:
 https://github.com/VLOGroup/imageutilities
 and read the licensing information provided there.
 
+=====================================================================
 
-==========================================================================
 DISCLAIMER:
 This software has been rewritten for the sake of providing an implementation 
 in a recent language. Therefore, the results produced by the code may differ
 from those presented in the paper [1]. 
 Results are also always subject to the training procedure, training set, etc.
-==========================================================================
+
+=====================================================================
 
 IMPORTANT:
 If you use this software you should cite the following in any resulting publication:
