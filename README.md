@@ -76,5 +76,5 @@ CONTENT
 4. The folder cudaMedian implements a weighted median Layer. Ie. we can learn the 
    weights of a weighted median Filter. Such a filter is used in popular optical flow
    methods, eg. in Sun et al. 'Secrets of Optical Flow Estimation and Their Principles'
-   method. Here we ahve a learnable version of that filter (ie. we can learn the weights).
+   method. Here we have a learnable version of that filter (ie. we can learn the weights).
    
