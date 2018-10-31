@@ -58,3 +58,23 @@ INSTALLING & RUNNING
     Also verify the installation path to the ImageUtilities library 
     in the file setup.py.
     
+CONTENT
+
+1. The folder 'cudaTV' contains the Optimization Layer from the ACCV paper. 
+   More precisely this is the TV version. Contained is a PyTorch layer:
+   'TVInpainting.py' that can be used directly after compilation succeeds. 
+   Note the 'id' parameter. This one ensures that the buffers are assigned to 
+   the correct instantiation of the layer. This allows one to have multiple of 
+   these layers executed, for instance to build a hierarchical scheme as was 
+   done for optical flow computation. For now the ids are limited to 0..9 and 
+   each layer should have a different id. With a trivial change in the code (setting
+   __uniqueIds__ in TVInpaintFista.h to a different value) one can have more layers.
+2. The folder 'cudaTGV' contains the TGV version of the optimization layer 
+   used in the ACCV paper.
+3. The folder QuadFitting holds a version of our quadratic fitting procedure through 
+   which we can backpropagate through. That code was also used in our ACCV paper.
+4. The folder cudaMedian implements a weighted median Layer. Ie. we can learn the 
+   weights of a weighted median Filter. Such a filter is used in popular optical flow
+   methods, eg. in Sun et al. 'Secrets of Optical Flow Estimation and Their Principles'
+   method. Here we have a learnable version of that filter (ie. we can learn the weights).
+   
