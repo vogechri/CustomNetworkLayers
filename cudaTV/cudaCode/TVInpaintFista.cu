@@ -70,17 +70,19 @@
 
 ////////////////////////////////////////////////////
 //
-// If enabled gradient updates that are much larger ( scale_T * runningmean < |grad| < _kill_T_ * runningmean)
-// than the running average  are scaled to be at max _scale_T_ larger than running average.
+// If gradient updates are much larger ( scale_T * runningmean < |grad| < _kill_T_ * runningmean)
+// than the running average, returned gradients are scaled to be at max _scale_T_ larger than running average.
 // Superlarge ones are ignored ( > _kill_T_ * runningmean )
-// Why? Assume a simple optimization scheme as RMSProp it scales the gradients by the runnig mean.
-// If one is much large than this running mean we end up in an explosion.
+//
+// Why? Assume a simple optimization scheme like RMSProp. RMSProp scales the gradients by the running mean.
+// If one gradient is much large than this running mean an explosion of values happens. 
+// Ie. the last gradient step dominates learned values.
 // This is happening very rarely, but the check solves all problems here, without negative influence.
 //
-// if gradient are _kill_T_ larger than runnig mean, ignore them all (See above rmsprop example).
+// If gradient are _kill_T_ larger than runnig mean, ignore them all (See above rmsprop example).
 #define _kill_T_  50.
 //
-// if gradient are _scale_T_ larger than runnig mean, rescale them to avoid too
+// If gradient are _scale_T_ larger than runnig mean, rescale them to avoid too
 // large updates due to the optimization algorithm. (See above rmsprop example)
 #define _scale_T_ 10.
 // memory / update rate of running mean
@@ -1826,3 +1828,18 @@ int TVInpaintFista::backward( float *d_x, float *d_y, float *d_c, float *d_b,
   TVInpaintFista::id[id].run++;
   return 0;
 }
+#undef __debug_info_period__
+#undef _NAN_Input_Check_
+#undef _NAN_Output_Check_
+#undef COMMON_BLOCK_SIZE_2D_X
+#undef COMMON_BLOCK_SIZE_2D_Y
+#undef __Huber1__
+#undef __HDelta1__
+#undef clipLocalGrad
+#undef localGCMult
+#undef localGXMult
+#undef localGBMult
+#undef globalGMult 
+#undef _kill_T_
+#undef _scale_T_ 
+#undef _memory_T_

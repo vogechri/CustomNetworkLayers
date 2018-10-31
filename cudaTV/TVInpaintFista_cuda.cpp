@@ -16,7 +16,7 @@ public:
 
 	static int backward( float *d_x, float *d_y, float *d_c, float *d_b, float *d_inGrad,
 	                     float *d_outGradX, float *d_outGradY, float *d_outGradC, float *d_outGradB, float *d_outGradInit,
-	                     int ic, int ih, int iw, int ingrad_c, int its = 10000, int id = 0);
+	                     int ic, int ih, int iw, int its = 10000, int id = 0);
 };
 
 //////////////////////////////////////////////////

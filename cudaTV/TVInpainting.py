@@ -39,7 +39,8 @@ class TVInpaint(nn.Module):
 
     def forward(self, t_dx, t_dy, t_dc, t_db, t_di):
 
-        #Y, X, L = t_db.shape # here we assume no batches. 
+        Yx, Xx, Lx = t_dx.shape # here we assume no batches. 
+        assert Lx==1, "diffusion tensors should have 1 channel\n"
 
         t_dx_in = t_dx.permute(2, 0, 1).unsqueeze(0) # order is 1,Channel,Height,Width
         t_dy_in = t_dy.permute(2, 0, 1).unsqueeze(0) # order is 1,Channel,Height,Width

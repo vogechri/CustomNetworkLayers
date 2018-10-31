@@ -2,7 +2,6 @@
 #include <vector>
 
 ///
-
 #define __uniqueIds__ 10
 
 class idStruct {
@@ -44,8 +43,8 @@ public:
 	double av_GB; // running mean of gradient norm wrt. rhs, eg u_hat
 	double av_GI; // running mean of gradient norm wrt. input
 	std::vector<int>    iterations;     // the fixpoints with intermediate storage
-	std::vector<float*> intermediate_x; // should also know the iteration number. alos need the x .. since we do overrelaxation .. right ?
-	std::vector<float*> intermediate_y; // should also know the iteration number. y_o is the right ahnd  side by convention !! no need to store -- or whatever ..
+	std::vector<float*> intermediate_x; // checkpointing variables
+	std::vector<float*> intermediate_y; // checkpointing variables
 	std::vector<float>  stepSizes;      // just precompute ..
 	int maxInterIts; // maximal number of iterations run here.
 };
@@ -63,10 +62,11 @@ public:
 
 
 // dx,dy: tensors/edge weights in x and y direction. d_c: confidence, d_b rhs, eg. u_hat;
-// d_out: output. 
+// d_b rhs, eg. u_hat; d_i: initial solution, eg. d_b or from other hirarchy level.
+// d_solution: output. 
 // ic: channels(# of rhs/channels of b), iw: width ih: height of inputs
 // its: iterations to run.
-// id: we can run multiple inpainters, eg. for different resolutions. To idnetify the buffers, etc.
+// id: we can run multiple inpainters, eg. for different resolutions. To identify the buffers, etc.
 // we need an id, that is specified by the user. Its a number between 0 and 9 so far..
 	static int forward(float *d_dx, float *d_dy, float *d_c, float *d_b, float *d_i, float *d_solution,
 	                   int ic, int ih, int iw, int its = 10000, int id = 0);
@@ -94,3 +94,4 @@ private:
 
 // we use 10 buffers .. ie. we cna run 10 independent instances.
 std::vector <idStruct> TVInpaintFista::id = std::vector <idStruct>(__uniqueIds__);
+#undef __uniqueIds__
