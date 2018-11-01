@@ -47,7 +47,8 @@
 // Clip large gradients. not needed, even works a bit worse.
 //#define clipvalue 3000.25f
 
-// clip local gradients before adding to buffer to avoid overflows. (Double buffers make this more or less obsolete). Keep for safety.
+// clip local gradients before adding to buffer to avoid overflows. 
+// (Double buffers make this more or less obsolete). Keep for safety.
 #define clipLocalGrad 10000.0f
 //#define clipLocalGrad 3000.0f
 
