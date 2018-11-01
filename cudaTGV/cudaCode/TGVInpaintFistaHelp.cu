@@ -117,8 +117,9 @@ struct sqroot
 };
 
 template <typename S>
-void update_correct_av_step_host(int run, double av_gc, double& av_GC, std::vector<S>&tempc, double run_step, const char* XX )
+void update_correct_av_step_host(int run, double av_gc, double& av_GC, std::vector<S>&tempc, double run_step_in, const char* XX )
 {
+  const double run_step = std::min( _memory_T_, run_step_in);
   if ( run >= 10 && av_GC * _kill_T_ < av_gc )
   {
     std::cerr << "Killed the update  step for " << XX[0] << ": " << av_gc << " vs " << av_GC << " = " << av_gc / av_GC << " \n";

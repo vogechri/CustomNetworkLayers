@@ -1,5 +1,5 @@
 #include <cuda_runtime.h>
-#include "FistaTGVSystemH_id_betas.h"
+#include "TGVInpaintFista.h"
 #include "TGVInpaintFistaHelp.cu"
 
 // produce png images from the gradients
@@ -2478,7 +2478,6 @@ int FistaTGVHuberB2_id::forward( float *d_x, float *d_y, float *d_c, float *d_b,
   const int in = 1;     // d_in has 3 channels: primary + 2x auxxiliary variables .. i use 3*in
   const int c_xyc = 2;  // edge weights have 2 channel: primary & auxxiliary variables
   const int c_dims = 1;// dimension of confidence -- note this could also be 2 == different for flowx and flowy
-  const int ingrad_c = ic;
 
   if (static_cast<size_t> (id) >= FistaTGVHuberB2_id::id.size())
   {
@@ -2745,7 +2744,7 @@ int FistaTGVHuberB2_id::backward( float *d_x, float *d_y, float *d_c, float *d_b
   std::vector<double> gy_storage( c_xyc  * ih * iw, 0 );// changed
   std::vector<double> gb_storage( ingrad_c * ih * iw, 0 );
 
-  float nIts(1.); double scaleFactor(1.);
+  float nIts(1.);
   for ( int outer = FistaTGVHuberB2_id::id[id].iterations.size() - 1; outer >= 0; outer--)
   {
     int nextLastIt = FistaTGVHuberB2_id::id[id].iterations[ outer ];
@@ -2943,7 +2942,6 @@ int FistaTGVHuberB2_id::backward( float *d_x, float *d_y, float *d_c, float *d_b
     }
     std::vector<float> vf( 3 * ingrad_c * ih * iw, 0 );
     double maxG = 0;
-    double localScaleFactor = 1.;
     cudaMemcpy( vf.data(), d_gxk05_0_temp.data(), 3 * ingrad_c * ih * iw * sizeof(float), cudaMemcpyDeviceToHost );
     for (int i = 0; i < vf.size(); i++)
       maxG = std::max( maxG, (double)std::abs(vf[i]) );
@@ -2990,7 +2988,7 @@ int FistaTGVHuberB2_id::backward( float *d_x, float *d_y, float *d_c, float *d_b
   */
 
 #ifdef _NAN_Output_Check_
-  double run_step = std::min( _memory_T_, double(FistaTGVHuberB2_id::id[id].run) / double(FistaTGVHuberB2_id::id[id].run + 1) );
+  double run_step = double(FistaTGVHuberB2_id::id[id].run) / double(FistaTGVHuberB2_id::id[id].run + 1);
   double is_largest = 0; int num_above = 0; double av_gc = 0;
 
   check_gradUpdate( gc_storage, av_gc, is_largest, num_above, FistaTGVHuberB2_id::id[id].av_GC, "C" );
