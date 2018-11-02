@@ -164,7 +164,7 @@ std::vector<at::Tensor> tgvInpaint_backward( at::Tensor d_iGf, at::Tensor d_x, a
 																		 (float*) ( d_oGi.data<float>() ), channel, height, width, its, id );
 		if (result)
 		{
-			std::cout << "Cuda Function call TGVInpaint::forward failed"; return {};
+			std::cout << "Cuda Function call TGVInpaint::backward failed"; return {};
 		}
 		return {d_oGx, d_oGy, d_oGc, d_oGb, d_oGi};
 	}

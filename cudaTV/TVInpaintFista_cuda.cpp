@@ -134,7 +134,7 @@ std::vector<at::Tensor> tvInpaint_backward( at::Tensor d_iGf, at::Tensor d_x, at
 																		 (float*) ( d_oGi.data<float>() ), channel, height, width, its, id );
 		if (result)
 		{
-			std::cout << "Cuda Function call TVInpaint::forward failed"; return {};
+			std::cout << "Cuda Function call TVInpaint::backward failed"; return {};
 		}
 		return {d_oGx, d_oGy, d_oGc, d_oGb, d_oGi};
 	}
