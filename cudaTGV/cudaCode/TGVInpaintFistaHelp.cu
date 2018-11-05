@@ -170,8 +170,8 @@ template <typename S> void check_gradUpdate( std::vector<S>& tempc, double &av_g
 
   if (invlid > 0)
     std::cerr << "Invalid gradient updates detected: " << XX[0] << " " << invlid << "\n";
-  if (num_above > 0)
-    std::cerr << "Gradient update clipped: " << XX[0] << " " << num_above << "\n";
+  // if (num_above > 0)
+  //   std::cerr << "Gradient update clipped: " << XX[0] << " " << num_above << "\n";
 }
 
 

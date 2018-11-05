@@ -52,13 +52,6 @@ std::vector<at::Tensor> flowQuadFitting_forward(at::Tensor featureImage0,
 	const int height    = featureImage0.size(2);
 	const int width     = featureImage0.size(3);
 
-	// if (batches != 1)
-	// {
-	// 		std::cout << "Cuda Function call flowQuadFitting::forward failed\n\
-	// 		 The function can only handle a batchsize of one\n"; return {};
-	// }
-	//std::cout << "FW -- Input: " << batches << " " << channel << " " << height << " " << width <<"\n";
-
 	if ( flow.type().scalarType() == at::ScalarType::Float )
 	{
 		at::Tensor flowUpdate = at::CUDA(at::kFloat).zeros({batches, 2, height, width});
@@ -100,14 +93,6 @@ std::vector<at::Tensor> flowQuadFitting_backward( at::Tensor d_iGf,
 	const int height    = featureImage0.size(2);
 	const int width     = featureImage0.size(3);
 
-	// cannot happen since forward is checking this already
-	// if (batches != 1)
-	// {
-	// 		std::cout << "Cuda Function call tvInpaint::backward failed\n\
-	// 		 The function can only handle a batchsize of one\n"; return {};
-	// }
-	//std::cout << "Input: " << batches << " " << channel << " " << height << " " << width <<"\n";
-
 	if ( flow.type().scalarType() == at::ScalarType::Float )
 	{
 		auto d_oFeat0 = at::zeros_like( featureImage0 );
@@ -117,7 +102,7 @@ std::vector<at::Tensor> flowQuadFitting_backward( at::Tensor d_iGf,
 																					 (float*) ( featureImage1.data<float>() ),
   		                                     (float*) ( flow.data<float>() ),
 																					 (float*) ( d_iGf.data<float>() ), 
-																					 (float*) ( d_oFeat0.data<float>() ), (float*) ( d_oFeat1.data<float>() )
+																					 (float*) ( d_oFeat0.data<float>() ), (float*) ( d_oFeat1.data<float>() ),
 																					 batches, channel, height, width );
 		if (result)
 		{
